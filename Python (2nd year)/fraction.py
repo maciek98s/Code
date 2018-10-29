@@ -1,6 +1,7 @@
 #Author : Maciej Skrzypczynski
 #Program description : Program designed to find the sum and the difference of two fractions
 #As well as fiding a fractions simplest form
+#Date : 29/10/2018
 
 def GCD(a,b):
     """Function to find the greatest common divider """
