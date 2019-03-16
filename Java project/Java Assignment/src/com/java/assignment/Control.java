@@ -1,3 +1,10 @@
+/***
+ * Author : Maciej Skrzypczynski ( C17339163)
+ * Date: 16/03/2019
+ * Description : Data explorer assignment topic using orcale 
+ * 
+ */
+
 package com.java.assignment;
 
 public class Control {
