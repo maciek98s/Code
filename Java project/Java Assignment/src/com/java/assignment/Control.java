@@ -12,8 +12,12 @@ public class Control {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		DBConnect dbc = new DBConnect();
-
+		//DBConnect dbc = new DBConnect();
+		//SQLqueries query1 = new SQLqueries("SELECT NAME,LOCATION,AREAOFCITY FROM PARKS_IN_GALWAY_CITY");
+		//query1.executeQuery();
+		//query1.displayQuery();
+		
+		GUI gui = new GUI("DATa explorer");
 	}
 
 }
