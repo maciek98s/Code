@@ -13,7 +13,7 @@ public class Control {
 		// TODO Auto-generated method stub
 		
 		//DBConnect dbc = new DBConnect();
-		//SQLqueries query1 = new SQLqueries("SELECT NAME,LOCATION,AREAOFCITY FROM PARKS_IN_GALWAY_CITY");
+		//SQLqueries query1 = new SQLqueries("SELECT NAME FROM PARKS_IN_GALWAY_CITY");
 		//query1.executeQuery();
 		//query1.displayQuery();
 		
