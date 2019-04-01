@@ -59,39 +59,7 @@ public class SQLqueries
 	public void setResult(ResultSet result) {
 		this.result = result;
 	}
-	/*
-	public TableModel displayResultToJtable()
-	{
-		try
-		{
-			ResultSetMetaData metaData = result.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
-            Vector columnNames = new Vector();
-            
-            for (int column = 0; column < numberOfColumns; column++) {
-                columnNames.addElement(metaData.getColumnLabel(column + 1));
-            }
-            Vector rows = new Vector();
 
-            while (result.next()) {
-                Vector newRow = new Vector();
-
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    newRow.addElement(result.getObject(i));
-                }
-
-                rows.addElement(newRow);
-            }
-            return new DefaultTableModel(rows, columnNames);
-		}
-            catch(Exception ee)
-            {
-            	return null;
-            }
-
-            
-	}
-	*/
 }
 	
 	
