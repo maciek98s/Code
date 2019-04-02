@@ -19,6 +19,7 @@ public class GUI extends JFrame implements ActionListener
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane pane;
+	private DefaultTableModel dataModel;
 	
 	public GUI(String title)
 	{
@@ -31,12 +32,15 @@ public class GUI extends JFrame implements ActionListener
 		button2 = new JButton("Show");
 		button3 = new JButton("Clear");
 		textfield1 = new JTextField("Enter query here");
+		
 		add(panel1, BorderLayout.NORTH);
 		add(panel2, BorderLayout.CENTER);
+		
 		panel1.add(textfield1);
 		panel1.add(button1);
 		panel1.add(button2);
 		panel1.add(button3);
+		
 		button1.addActionListener(this);
 		button2.addActionListener(this);
 		button3.addActionListener(this);
@@ -54,18 +58,14 @@ public class GUI extends JFrame implements ActionListener
 	    {
 	    	try
 	    	{
-	    		SQLqueries sql = new SQLqueries(textfield1.getText());
+	    		
+	    		Queries sql = new Queries(textfield1.getText());
 		    	sql.executeQuery();
 		    	sql.displayQuery();
-	    		//DefaultTableModel def = (DefaultTableModel) sql.displayResultToJtable();
-	    		//JTable table = (JTable) sql.displayResultToJtable();
+		    	dataModel = (DefaultTableModel) (sql.resultSetToTableModel());
 		    	table = new JTable();
-	    		table.setModel(DbUtils.resultSetToTableModel(sql.getResult()));
+	    		table.setModel(dataModel);
 
-	    		//JScrollPane pane = new JScrollPane(table);
-	    		//panel2.remove(pane);
-	    		//panel2.add(pane);
-		    	
 	    	}
 	    	catch(Exception ee)
 	    	{
@@ -78,12 +78,14 @@ public class GUI extends JFrame implements ActionListener
     		pane = new JScrollPane(table);
     		pane.setPreferredSize(new Dimension(1000,400));
     		panel2.add(pane);
+   
     		revalidate();
 	    }
 	    if (e.getSource() == button3)
 	    {
 	    	panel2.removeAll();
 	    	revalidate();
+	    	repaint();
 	    }
 		
 	}
