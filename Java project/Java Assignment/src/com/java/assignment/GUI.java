@@ -194,7 +194,7 @@ public class GUI extends JFrame implements ActionListener
 	
 	public void normalmodeON()
 	{
-		
+		clearTable();
 		displayTable();
 		label1.setText("Interesting facts");
 		panel3.add(label1);
