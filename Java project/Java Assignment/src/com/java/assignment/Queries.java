@@ -23,15 +23,14 @@ public class Queries
 	private DBConnect databaseConnection;
 	private ResultSet result;
 	private Statement statement;
-	private String query;
 
-	public Queries(String query)
+
+	public Queries()
 	{
 		databaseConnection = new DBConnect();
-		this.query = query;
 	}
 	
-	public void executeQuery()
+	public void executeQuery(String query)
 	{
 		try
 		{
@@ -45,7 +44,7 @@ public class Queries
 		}
 	}
 	
-	public void displayQuery()
+	/*public void displayQuery()
 	{
 		try
 		{
@@ -61,7 +60,7 @@ public class Queries
 			
 		}
 	}
-
+*/
 	public ResultSet getResult() {
 		return result;
 	}
