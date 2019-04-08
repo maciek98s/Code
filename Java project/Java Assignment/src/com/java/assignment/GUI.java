@@ -16,6 +16,7 @@ public class GUI extends JFrame implements ActionListener
 	private JButton button4;
 	private JButton button5;
 	private JButton button6;
+	private JButton button7;
 	
 	private JTextField textfield1;
 	private JTextField textfield2;
@@ -53,6 +54,7 @@ public class GUI extends JFrame implements ActionListener
 		button4 = new JButton("INFO");
 		button5 = new JButton("Submit");
 		button6 = new JButton("NormalMode");
+		button7 = new JButton("Quit");
 		textfield1 = new JTextField("Enter Category");
 		
 		textfield2 = new JTextField("",5);
@@ -64,14 +66,16 @@ public class GUI extends JFrame implements ActionListener
 		add(panel3, BorderLayout.WEST);
 		
 		panel1.add(button1);
-		panel1.add(button2);
-		panel1.add(button3);
-		panel1.add(button6);
+		//panel1.add(button2);
+		//panel1.add(button3);
+		//panel1.add(button6);
 		
 		
 		button1.addActionListener(this);
 		button2.addActionListener(this);
 		button3.addActionListener(this);
+		button7.addActionListener(this);
+		button4.addActionListener(this);
 		button5.addActionListener(this);
 		button6.addActionListener(this);
 		box.addActionListener(this);
@@ -91,6 +95,21 @@ public class GUI extends JFrame implements ActionListener
 	    	try
 	    	{
 	    		sql = new Queries();
+	    		if(sql.ConnectionStatus()==false)
+	    		{
+	    			JOptionPane.showMessageDialog(null, "Could not successfully connect to the database");
+	    			System.exit(0);
+	    			
+	    		}
+	    		else
+	    		{
+	    			JOptionPane.showMessageDialog(null, "Connected");
+	    			panel1.add(button2);
+	    			panel1.add(button3);
+	    			panel1.add(button6);
+	    			panel1.remove(button1);
+	    			panel1.add(button7);
+	    		}
 	    		if(textfield1.getText().equals("Enter Category"))
 	    		{
 		    		sql.executeQuery("Select * from city");
@@ -114,14 +133,24 @@ public class GUI extends JFrame implements ActionListener
 	    }
 	    if (e.getSource() == button2)
 	    {
+	    	JOptionPane.showMessageDialog(null, "Welcome to the Advnaced mode please click the INFO button for more information about this mode");
 	    	clearMode();
 	    	advancemodeON();
 	    }
 	    if (e.getSource() == button3)
 	    {
+	    	JOptionPane.showMessageDialog(null, "Welcome to SQL Mode in this mode you can enter an sql select statement of your choice with correct syntax to be viewed in the table");
 			clearMode();
 			sqlMode();
 
+		
+	    }
+	    if (e.getSource() == button4)
+	    {
+	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause "
+	    			+ "for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park ");
+	    	
+	    	
 		
 	    }
 	    if (e.getSource() == box)
@@ -166,20 +195,20 @@ public class GUI extends JFrame implements ActionListener
 	    }
 	    if (e.getSource() == button5)
 	    {
-	    	String q1,q2,q3,q4; 
+	    	String qeuryString1,qeuryString2,qeuryString3,qeuryString4; 
 	    	
-	    	 q1  = "\""+ textfield1.getText().toUpperCase()+"\"";
+	    	qeuryString1  = "\""+ textfield1.getText().toUpperCase()+"\"";
 	    	 if(textfield2.getText().equals(""))
 	    	 {
-	    		 sql.executeQuery("select "+q1+"from city");
+	    		 sql.executeQuery("select "+qeuryString1+"from city");
 	    	 }
 	    	 else
 	    	 {
-	    		 q2  = "\""+ textfield2.getText().toUpperCase()+"\"";
-	    		 q3  = textfield3.getText().toUpperCase();
-	    		 q4  = "'"+ textfield4.getText()+"'";
-	    		 System.out.println("select "+q1+"from city where "+q2+q3+q4);
-	    		 sql.executeQuery("select "+q1+"from city where "+q2+q3+q4);
+	    		 qeuryString2  = "\""+ textfield2.getText().toUpperCase()+"\"";
+	    		 qeuryString3  = textfield3.getText().toUpperCase();
+	    		 qeuryString4  = "'"+ textfield4.getText()+"'";
+	    		 System.out.println("select "+qeuryString1+"from city where "+qeuryString2+qeuryString3+qeuryString4);
+	    		 sql.executeQuery("select "+qeuryString1+"from city where "+qeuryString2+qeuryString3+qeuryString4);
 	    	 }
 	    	clearTable();
 	    	displayTable();
@@ -188,6 +217,13 @@ public class GUI extends JFrame implements ActionListener
 	    {
 	    	clearMode();
 	    	normalmodeON();
+	    	
+	    }
+	    if (e.getSource() == button7)
+	    {
+	    	sql.closeConnection();
+	    	System.exit(0);
+	    	
 	    }
 		
 	}
@@ -200,6 +236,8 @@ public class GUI extends JFrame implements ActionListener
 		panel3.add(label1);
 		panel3.add(box);
 		revalidate();
+		JOptionPane.showMessageDialog(null, "Welcome to the Normal please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
+				+ "you should note if you want more options please consider changing modes ");
 	}
 	public void clearMode()
 	{
@@ -209,6 +247,7 @@ public class GUI extends JFrame implements ActionListener
 	public void advancemodeON()
 	{
 		panel3.add(button4);
+		//textfield1.setText("Enter your Category");
 		panel3.add(textfield1);
 		panel3.add(textfield2);
 		panel3.add(textfield3);
@@ -222,7 +261,7 @@ public class GUI extends JFrame implements ActionListener
     	table = new JTable();
 		table.setModel(dataModel);
    		pane = new JScrollPane(table);
-		pane.setPreferredSize(new Dimension(1000,400));
+		pane.setPreferredSize(new Dimension(800,400));
 		panel2.add(pane);
 		revalidate();
 	}
