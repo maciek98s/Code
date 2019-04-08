@@ -17,6 +17,7 @@ public class GUI extends JFrame implements ActionListener
 	private JButton button5;
 	private JButton button6;
 	private JButton button7;
+	private JButton button8;
 	
 	private JTextField textfield1;
 	private JTextField textfield2;
@@ -55,6 +56,7 @@ public class GUI extends JFrame implements ActionListener
 		button5 = new JButton("Submit");
 		button6 = new JButton("NormalMode");
 		button7 = new JButton("Quit");
+		button8 = new JButton("Preview");
 		textfield1 = new JTextField("Enter Category");
 		
 		textfield2 = new JTextField("",5);
@@ -66,10 +68,6 @@ public class GUI extends JFrame implements ActionListener
 		add(panel3, BorderLayout.WEST);
 		
 		panel1.add(button1);
-		//panel1.add(button2);
-		//panel1.add(button3);
-		//panel1.add(button6);
-		
 		
 		button1.addActionListener(this);
 		button2.addActionListener(this);
@@ -78,6 +76,7 @@ public class GUI extends JFrame implements ActionListener
 		button4.addActionListener(this);
 		button5.addActionListener(this);
 		button6.addActionListener(this);
+		button8.addActionListener(this);
 		box.addActionListener(this);
 		
 		
@@ -94,24 +93,24 @@ public class GUI extends JFrame implements ActionListener
 	    {
 	    	try
 	    	{
-	    		sql = new Queries();
-	    		if(sql.ConnectionStatus()==false)
-	    		{
-	    			JOptionPane.showMessageDialog(null, "Could not successfully connect to the database");
-	    			System.exit(0);
-	    			
-	    		}
-	    		else
-	    		{
-	    			JOptionPane.showMessageDialog(null, "Connected");
-	    			panel1.add(button2);
-	    			panel1.add(button3);
-	    			panel1.add(button6);
-	    			panel1.remove(button1);
-	    			panel1.add(button7);
-	    		}
 	    		if(textfield1.getText().equals("Enter Category"))
 	    		{
+		    		sql = new Queries();
+		    		if(sql.ConnectionStatus()==false)
+		    		{
+		    			JOptionPane.showMessageDialog(null, "Could not successfully connect to the database");
+		    			System.exit(0);
+		    			
+		    		}
+		    		else
+		    		{
+		    			JOptionPane.showMessageDialog(null, "Welcome to the Data Explorer program");
+		    			panel1.add(button2);
+		    			panel1.add(button3);
+		    			panel1.add(button6);
+		    			panel1.remove(button1);
+		    			panel1.add(button7);
+		    		}
 		    		sql.executeQuery("Select * from city");
 		    		normalmodeON();
 	    		}
@@ -133,22 +132,21 @@ public class GUI extends JFrame implements ActionListener
 	    }
 	    if (e.getSource() == button2)
 	    {
-	    	JOptionPane.showMessageDialog(null, "Welcome to the Advnaced mode please click the INFO button for more information about this mode");
 	    	clearMode();
 	    	advancemodeON();
+	    	JOptionPane.showMessageDialog(null, "Welcome to the Advnaced mode please click the INFO button for more information about this mode");
 	    }
 	    if (e.getSource() == button3)
 	    {
-	    	JOptionPane.showMessageDialog(null, "Welcome to SQL Mode in this mode you can enter an sql select statement of your choice with correct syntax to be viewed in the table");
 			clearMode();
 			sqlMode();
-
+			JOptionPane.showMessageDialog(null, "Welcome to SQL Mode in this mode you can enter an sql select statement of your choice with correct syntax to be viewed in the table");
 		
 	    }
 	    if (e.getSource() == button4)
 	    {
 	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause "
-	    			+ "for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park ");
+	    			+ "for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park Click PREVIEW button to Show the whole table ");
 	    	
 	    	
 		
@@ -168,7 +166,7 @@ public class GUI extends JFrame implements ActionListener
 	    		}
 	    		case "Interesting fact 2":
 	    		{
-	    			label1.setText("Names of the parks that are located in Barna Road, Galway ");
+	    			label1.setText("Names and locations of Parks in Galway City ");
 	    			sql.executeQuery("select \"NAME\",\"LOCATION\" from city");
 	    	    	clearTable();
 	    	    	displayTable();
@@ -176,16 +174,16 @@ public class GUI extends JFrame implements ActionListener
 	    		}
 	    		case "Interesting fact 3":
 	    		{
-	    			label1.setText("Names of the parks that are located in Barna Road, Galway ");
-	    			sql.executeQuery("select * from city");
+	    			label1.setText("Names of the Parks in galway city and their facilities ");
+	    			sql.executeQuery("select \"NAME\",\"FACILITIES\" from city");
 	    	    	clearTable();
 	    	    	displayTable();
 	    			break;
 	    		}
 	    		case "Interesting fact 4":
 	    		{
-	    			label1.setText("Names of the parks that are located in Barna Road, Galway ");
-	    			sql.executeQuery("select NAME from city where NUMBER='1'");
+	    			label1.setText("Parks that are only city parks");
+	    			sql.executeQuery("select \"NAME\",\"DESCR\" from city where \"DESCR\" = 'City Park'");
 	    	    	clearTable();
 	    	    	displayTable();
 	    			break;
@@ -225,18 +223,25 @@ public class GUI extends JFrame implements ActionListener
 	    	System.exit(0);
 	    	
 	    }
+	    if (e.getSource() == button8)
+	    {
+	    	clearTable();
+	    	sql.executeQuery("Select * from city");
+	    	displayTable();
+	    	
+	    	
+	    }
 		
 	}
 	
 	public void normalmodeON()
 	{
 		clearTable();
-		displayTable();
 		label1.setText("Interesting facts");
 		panel3.add(label1);
 		panel3.add(box);
 		revalidate();
-		JOptionPane.showMessageDialog(null, "Welcome to the Normal please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
+		JOptionPane.showMessageDialog(null, "Welcome to the Normalmode please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
 				+ "you should note if you want more options please consider changing modes ");
 	}
 	public void clearMode()
@@ -246,13 +251,15 @@ public class GUI extends JFrame implements ActionListener
 	}
 	public void advancemodeON()
 	{
+		clearTable();
 		panel3.add(button4);
-		//textfield1.setText("Enter your Category");
+		textfield1.setText("Enter your Category");
 		panel3.add(textfield1);
 		panel3.add(textfield2);
 		panel3.add(textfield3);
 		panel3.add(textfield4);
 		panel3.add(button5);
+		panel3.add(button8);
 		revalidate();
 	}
 	public void displayTable()
@@ -274,6 +281,7 @@ public class GUI extends JFrame implements ActionListener
 	}
 	public void sqlMode()
 	{
+		clearTable();
 		textfield1.setText("Enter your SQL Statement here");
 		button1 = new JButton("Submit");
 		button1.addActionListener(this);
