@@ -8,6 +8,10 @@ public class DBConnect
 	
 	public DBConnect()
 	{
+
+	}
+	public boolean Connect()
+	{
 		try
 		{
 			/*  String servername = "ferdia.cs.dit.ie";
@@ -20,10 +24,23 @@ public class DBConnect
 	*/
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			setConnect(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","mac","mac"));
+			return true;
 		}
 		catch(Exception ex)
 		{
-			System.out.println("Error "+ex);
+			System.out.println("ERROR");
+			return false;
+		}
+	}
+	public void closeConnection()
+	{
+		try
+		{
+			connect.close();
+		}
+		catch(Exception e)
+		{
+			
 		}
 	}
 
@@ -34,4 +51,5 @@ public class DBConnect
 	public void setConnect(Connection connect) {
 		this.connect = connect;
 	}
+
 }
