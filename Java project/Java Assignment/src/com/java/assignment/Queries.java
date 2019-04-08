@@ -23,11 +23,13 @@ public class Queries
 	private DBConnect databaseConnection;
 	private ResultSet result;
 	private Statement statement;
+	private boolean connectionStatus;
 
 
 	public Queries()
 	{
 		databaseConnection = new DBConnect();
+		connectionStatus = databaseConnection.Connect();
 	}
 	
 	public void executeQuery(String query)
@@ -43,30 +45,30 @@ public class Queries
 			System.out.println("Error");
 		}
 	}
-	
-	/*public void displayQuery()
-	{
-		try
-		{
-			while(getResult().next())
-			{
-				System.out.print(getResult().getString("NAME")+ "\t"+"\t");
-				System.out.print(getResult().getString("LOCATION")+ "\t"+"\t"+"\t"+"\t");
-				System.out.println(getResult().getString("AREAOFCITY")+ "\t"+"\t"+"\t"+"\t");
-			}
-		}
-		catch(Exception e)
-		{
-			
-		}
-	}
-*/
 	public ResultSet getResult() {
 		return result;
 	}
 
 	public void setResult(ResultSet result) {
 		this.result = result;
+	}
+	public boolean ConnectionStatus()
+	{
+		return connectionStatus;
+	}
+	public void closeConnection()
+	{
+		try
+		{
+			statement.close();
+			databaseConnection.closeConnection();
+			connectionStatus = false ;
+		}
+		catch(Exception e)
+		{
+			System.out.println("Could not close");
+		}
+		
 	}
 	public  TableModel resultSetToTableModel() {
 		try 
