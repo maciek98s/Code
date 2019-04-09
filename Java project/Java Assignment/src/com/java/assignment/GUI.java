@@ -105,11 +105,12 @@ public class GUI extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
+		
 	    if 	(e.getSource() == button1)
 	    {
 	    	try
 	    	{
-	    		
+	    		//if button pressed for the first time as connect button  do this 
 	    		if(textfield1.getText().equals("Enter Category"))
 	    		{
 		    		datasetQuery = new QueryProcessing();
@@ -119,6 +120,7 @@ public class GUI extends JFrame implements ActionListener
 		    			System.exit(0);
 		    			
 		    		}
+		    		//if connection == true meaning successful set up the panel
 		    		else
 		    		{
 		    			JOptionPane.showMessageDialog(null, "Welcome to the Data Explorer program");
@@ -130,6 +132,7 @@ public class GUI extends JFrame implements ActionListener
 		    		}
 		    		normalmodeON();
 	    		}
+	    		// else reused for submit button for sql mode
 	    		else
 	    		{
 	    			clearTable();
@@ -214,7 +217,7 @@ public class GUI extends JFrame implements ActionListener
 	    	
 	    	}
 	    }
-	    
+	    //button when pressed manipulates Jtextfields to execute a query
 	    if (e.getSource() == button5)
 	    {
 	    	String qeuryString1,qeuryString2,qeuryString3,qeuryString4; 
@@ -236,18 +239,21 @@ public class GUI extends JFrame implements ActionListener
 	    	//clearTable();
 	    	displayTable();
 	    }
+	    //button when pressed calls normalmode method
 	    if (e.getSource() == button6)
 	    {
 	    	clearMode();
 	    	normalmodeON();
 	    	
 	    }
+	    //button when pressed closes connection and exits the program
 	    if (e.getSource() == button7)
 	    {
 	    	datasetQuery.closeConnection();
 	    	System.exit(0);
 	    	
 	    }
+	    //button when pressed shows all entries in the table 
 	    if (e.getSource() == button8)
 	    {
 	    	clearTable();
@@ -259,7 +265,7 @@ public class GUI extends JFrame implements ActionListener
 	    }
 		
 	}
-	
+	//Method to turn on Normal mode by manipulating panels and their components 
 	public void normalmodeON()
 	{
 		clearTable();
@@ -270,11 +276,13 @@ public class GUI extends JFrame implements ActionListener
 		JOptionPane.showMessageDialog(null, "Welcome to the Normalmode please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
 				+ "you should note if you want more options please consider changing modes ");
 	}
+	//method to clear panel 3 
 	public void clearMode()
 	{
 		panel3.removeAll();
 		revalidate();
 	}
+	//Method to turn on Advance mode by manipulating panels and their components 
 	public void advancemodeON()
 	{
 		clearTable();
@@ -288,6 +296,7 @@ public class GUI extends JFrame implements ActionListener
 		panel3.add(button8);
 		revalidate();
 	}
+	//Method to display table in the GUI
 	public void displayTable()
 	{
 		try
@@ -306,6 +315,7 @@ public class GUI extends JFrame implements ActionListener
 			System.out.println("Table is null");
 		}
 	}
+	//method to clear the panel that shows the table 
 	public void clearTable()
 	{
     	panel2.removeAll();
@@ -313,6 +323,7 @@ public class GUI extends JFrame implements ActionListener
     	repaint();
 		
 	}
+	//Method to turn on SQL mode by manipulating panels and their components 
 	public void sqlMode()
 	{
 		clearTable();
@@ -324,6 +335,7 @@ public class GUI extends JFrame implements ActionListener
 		revalidate();
 		
 	}
+	//Method to check if query executed successfully and if not display appropriate message
 	public void errorMessageCheck()
 	{
 		if(datasetQuery.isQueryStatus() ==false)
