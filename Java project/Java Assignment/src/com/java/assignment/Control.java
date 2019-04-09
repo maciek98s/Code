@@ -1,7 +1,8 @@
 /***
  * Author : Maciej Skrzypczynski ( C17339163)
- * Last Update Date: 02/04/2019
- * Description : Data explorer assignment topic using orcale 
+ * Last Update Date: 09/04/2019
+ * Description : Data explorer assignment topic using orcale, this is the control class 
+ * and it has only the purpose of initialising the gui.
  * 
  */
 
@@ -14,7 +15,7 @@ public class Control {
 		
 
 		
-		GUI gui = new GUI("DATa explorer");
+		GUI gui = new GUI("DaTa explorer");
 	}
 
 }
