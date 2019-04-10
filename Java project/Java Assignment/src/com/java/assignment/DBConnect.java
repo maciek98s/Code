@@ -1,5 +1,5 @@
 /*Author : Maciej Skrzypczynski
- *Last Update Date: 09/04/2019
+ *Last Update Date: 11/04/2019
  *
  *Desciption : Class used for getting a connection to the database using oracle driver 
  *also contains methods to create and close connections 
