@@ -3,7 +3,7 @@
  *
  *Desciption : A class that contains The gui of the programm. 
  *It contains methods that execute code depending on which button is pressed
- *and it also contains methods that manipulate with the GUI and error checking methods 
+ *and it also contains methods that manipulate  the GUI and also it contains error checking methods 
  * 
  */
 
@@ -19,29 +19,29 @@ import java.awt.event.ActionListener;
 public class GUI extends JFrame implements ActionListener
 {
 	//Attributes
-	private JButton button1;
-	private JButton button2;
-	private JButton button3;
-	private JButton button4;
-	private JButton button5;
-	private JButton button6;
-	private JButton button7;
-	private JButton button8;
+	private JButton connectButton;
+	private JButton advanceModeButton;
+	private JButton sqlModeButton;
+	private JButton infoButton;
+	private JButton submitButton;
+	private JButton normalModeButton;
+	private JButton quitButton;
+	private JButton previewButton;
 	
-	private JTextField textfield1;
-	private JTextField textfield2;
-	private JTextField textfield3;
-	private JTextField textfield4;
+	private JTextField selectTextfield;
+	private JTextField clauseTextfield1;
+	private JTextField clauseTextfield2;
+	private JTextField clauseTextfield3;
 	
-	private JLabel label1;
+	private JLabel comboBoxLabel;
 	
-	private JPanel panel1;
-	private JPanel panel2;
-	private JPanel panel3;
+	private JPanel northPanel;
+	private JPanel centerPanel;
+	private JPanel westPanel;
 	
 	private JTable table;
-	private DefaultTableModel model;
-	private JScrollPane pane;
+	//private DefaultTableModel model;
+	private JScrollPane scrollPane;
 	private DefaultTableModel dataModel;
 	private JComboBox box;
 	private QueryProcessing datasetQuery;
@@ -49,7 +49,7 @@ public class GUI extends JFrame implements ActionListener
 	public GUI(String title)
 	{
 		super(title);
-		//setting layour
+		//setting layout
 		setLayout(new BorderLayout());
 		//Creating an array for Combo Box
 		String[] facts = {"Interesting fact 1","Interesting fact 2","Interesting fact 3","Interesting fact 4"};
@@ -57,42 +57,42 @@ public class GUI extends JFrame implements ActionListener
 		//Initialising Attributes 
 		box = new JComboBox(facts);
 		
-		panel1 = new JPanel();
-		panel2 = new JPanel();
-		panel3 = new JPanel();
+		northPanel = new JPanel();
+		centerPanel = new JPanel();
+		westPanel = new JPanel();
 		
-		label1 = new JLabel();
+		comboBoxLabel = new JLabel();
 		
-		button1 = new JButton("Connect");
-		button2 = new JButton("AdvancedMode");
-		button3 = new JButton("SQL MODE");
-		button4 = new JButton("INFO");
-		button5 = new JButton("Submit");
-		button6 = new JButton("NormalMode");
-		button7 = new JButton("Quit");
-		button8 = new JButton("Preview");
+		connectButton = new JButton("Connect");
+		advanceModeButton = new JButton("AdvancedMode");
+		sqlModeButton = new JButton("SQL MODE");
+		infoButton = new JButton("INFO");
+		submitButton = new JButton("Submit");
+		normalModeButton = new JButton("NormalMode");
+		quitButton = new JButton("Quit");
+		previewButton = new JButton("Preview");
 		
-		textfield1 = new JTextField("Enter Category");
-		textfield2 = new JTextField("",5);
-		textfield3 = new JTextField("",5);
-		textfield4 = new JTextField("",5);
+		selectTextfield = new JTextField("Enter Category");
+		clauseTextfield1 = new JTextField("",5);
+		clauseTextfield2 = new JTextField("",5);
+		clauseTextfield3 = new JTextField("",5);
 		//add panel to layout
-		add(panel1, BorderLayout.NORTH);
-		add(panel2, BorderLayout.CENTER);
-		add(panel3, BorderLayout.WEST);
+		add(northPanel, BorderLayout.NORTH);
+		add(centerPanel, BorderLayout.CENTER);
+		add(westPanel, BorderLayout.WEST);
 		
 		//adding components to panel
-		panel1.add(button1);
+		northPanel.add(connectButton);
 		
-		//adding listeners to Componenets of GUI
-		button1.addActionListener(this);
-		button2.addActionListener(this);
-		button3.addActionListener(this);
-		button4.addActionListener(this);
-		button5.addActionListener(this);
-		button6.addActionListener(this);
-		button7.addActionListener(this);
-		button8.addActionListener(this);
+		//adding listeners to Components of GUI
+		connectButton.addActionListener(this);
+		advanceModeButton.addActionListener(this);
+		sqlModeButton.addActionListener(this);
+		infoButton.addActionListener(this);
+		submitButton.addActionListener(this);
+		normalModeButton.addActionListener(this);
+		quitButton.addActionListener(this);
+		previewButton.addActionListener(this);
 		box.addActionListener(this);
 		
 		
@@ -105,13 +105,12 @@ public class GUI extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		// TODO Auto-generated method stub
-		
-	    if 	(e.getSource() == button1)
+	    if 	(e.getSource() == connectButton)
 	    {
 	    	try
 	    	{
-	    		//if button pressed for the first time as connect button  do this 
-	    		if(textfield1.getText().equals("Enter Category"))
+	    		//if Enter Category is in text field 1 means button 1 == connect Button 
+	    		if(selectTextfield.getText().equals("Enter Category"))
 	    		{
 		    		datasetQuery = new QueryProcessing();
 		    		if(datasetQuery.connectionStatus()==false)
@@ -124,19 +123,19 @@ public class GUI extends JFrame implements ActionListener
 		    		else
 		    		{
 		    			JOptionPane.showMessageDialog(null, "Welcome to the Data Explorer program");
-		    			panel1.add(button2);
-		    			panel1.add(button3);
-		    			panel1.add(button6);
-		    			panel1.remove(button1);
-		    			panel1.add(button7);
+		    			northPanel.add(advanceModeButton);
+		    			northPanel.add(sqlModeButton);
+		    			northPanel.add(normalModeButton);
+		    			northPanel.remove(connectButton);
+		    			northPanel.add(quitButton);
 		    		}
-		    		normalmodeON();
+		    		normalModeOn();
 	    		}
-	    		// else reused for submit button for sql mode
+	    		// else button is reused for submit button for sql mode
 	    		else
 	    		{
 	    			clearTable();
-	    			datasetQuery.executeQuery(textfield1.getText());
+	    			datasetQuery.executeQuery(selectTextfield.getText());
 	    			errorMessageCheck();
 	    			displayTable();
 	    		}
@@ -151,22 +150,22 @@ public class GUI extends JFrame implements ActionListener
 	    	
 	    }
 	    //When button2 to pressed Panel clears and goes into Advance mode method 
-	    if (e.getSource() == button2)
+	    if (e.getSource() == advanceModeButton)
 	    {
 	    	clearMode();
-	    	advancemodeON();
+	    	advanceModeOn();
 	    	JOptionPane.showMessageDialog(null, "Welcome to the Advnaced mode please click the INFO button for more information about this mode");
 	    }
-	  //When button2 to pressed Panel clears and goes into sql mode method 
-	    if (e.getSource() == button3)
+	  //When button3 to pressed Panel clears and goes into sql mode method 
+	    if (e.getSource() == sqlModeButton)
 	    {
 			clearMode();
-			sqlMode();
+			sqlModeOn();
 			JOptionPane.showMessageDialog(null, "Welcome to SQL Mode in this mode you can enter an sql select statement of your choice with correct syntax to be viewed in the table (The Table name is city)");
 		
 	    }
 	    //When button4 clicked display information in a form of a pop up
-	    if (e.getSource() == button4)
+	    if (e.getSource() == infoButton)
 	    {
 	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause ");
 	    	JOptionPane.showMessageDialog(null, "for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park or just name with the rest of the fields blank");
@@ -184,7 +183,7 @@ public class GUI extends JFrame implements ActionListener
 	    	{
 	    		case "Interesting fact 1":
 	    		{
-	    			label1.setText("Names of the parks that are located in Barna Road, Galway ");
+	    			comboBoxLabel.setText("Names of the parks that are located in Barna Road, Galway ");
 	    			datasetQuery.executeQuery("select \"NAME\",\"LOCATION\" from city where \"LOCATION\" = 'Renmore, Galway'");
 	    			clearTable();
 	    	    	displayTable();
@@ -192,7 +191,7 @@ public class GUI extends JFrame implements ActionListener
 	    		}
 	    		case "Interesting fact 2":
 	    		{
-	    			label1.setText("Names and locations of Parks in Galway City ");
+	    			comboBoxLabel.setText("Names and locations of Parks in Galway City ");
 	    			datasetQuery.executeQuery("select \"NAME\",\"LOCATION\" from city");
 	    			clearTable();
 	    	    	displayTable();
@@ -200,7 +199,7 @@ public class GUI extends JFrame implements ActionListener
 	    		}
 	    		case "Interesting fact 3":
 	    		{
-	    			label1.setText("Names of the Parks in galway city and their facilities ");
+	    			comboBoxLabel.setText("Names of the Parks in galway city and their facilities ");
 	    			datasetQuery.executeQuery("select \"NAME\",\"FACILITIES\" from city");
 	    	    	clearTable();
 	    	    	displayTable();
@@ -208,7 +207,7 @@ public class GUI extends JFrame implements ActionListener
 	    		}
 	    		case "Interesting fact 4":
 	    		{
-	    			label1.setText("Parks that are only city parks");
+	    			comboBoxLabel.setText("Parks that are only city parks");
 	    			datasetQuery.executeQuery("select \"NAME\",\"DESCR\" from city where \"DESCR\" = 'City Park'");
 	    	    	clearTable();
 	    	    	displayTable();
@@ -218,21 +217,21 @@ public class GUI extends JFrame implements ActionListener
 	    	}
 	    }
 	    //button when pressed manipulates Jtextfields to execute a query
-	    if (e.getSource() == button5)
+	    if (e.getSource() == submitButton)
 	    {
 	    	String qeuryString1,qeuryString2,qeuryString3,qeuryString4; 
 	    	clearTable();
-	    	qeuryString1  = "\""+ textfield1.getText().toUpperCase()+"\"";
-	    	 if(textfield2.getText().equals(""))
+	    	qeuryString1  = "\""+ selectTextfield.getText().toUpperCase()+"\"";
+	    	 if(clauseTextfield1.getText().equals(""))
 	    	 {
 	    		 datasetQuery.executeQuery("select "+qeuryString1+"from city");
 	    		 errorMessageCheck();
 	    	 }
 	    	 else
 	    	 {
-	    		 qeuryString2  = "\""+ textfield2.getText().toUpperCase()+"\"";
-	    		 qeuryString3  = textfield3.getText().toUpperCase();
-	    		 qeuryString4  = "'"+ textfield4.getText()+"'";
+	    		 qeuryString2  = "\""+ clauseTextfield1.getText().toUpperCase()+"\"";
+	    		 qeuryString3  = clauseTextfield2.getText().toUpperCase();
+	    		 qeuryString4  = "'"+ clauseTextfield3.getText()+"'";
 	    		 datasetQuery.executeQuery("select "+qeuryString1+"from city where "+qeuryString2+qeuryString3+qeuryString4);
 	    		 errorMessageCheck();
 	    	 }
@@ -240,21 +239,21 @@ public class GUI extends JFrame implements ActionListener
 	    	displayTable();
 	    }
 	    //button when pressed calls normalmode method
-	    if (e.getSource() == button6)
+	    if (e.getSource() == normalModeButton)
 	    {
 	    	clearMode();
-	    	normalmodeON();
+	    	normalModeOn();
 	    	
 	    }
 	    //button when pressed closes connection and exits the program
-	    if (e.getSource() == button7)
+	    if (e.getSource() == quitButton)
 	    {
 	    	datasetQuery.closeConnection();
 	    	System.exit(0);
 	    	
 	    }
 	    //button when pressed shows all entries in the table 
-	    if (e.getSource() == button8)
+	    if (e.getSource() == previewButton)
 	    {
 	    	clearTable();
 	    	datasetQuery.executeQuery("Select * from city");
@@ -266,38 +265,39 @@ public class GUI extends JFrame implements ActionListener
 		
 	}
 	//Method to turn on Normal mode by manipulating panels and their components 
-	public void normalmodeON()
+	private void normalModeOn()
 	{
 		clearTable();
-		label1.setText("Interesting facts");
-		panel3.add(label1);
-		panel3.add(box);
+		comboBoxLabel.setText("Interesting facts");
+		westPanel.add(comboBoxLabel);
+		westPanel.add(box);
 		revalidate();
 		JOptionPane.showMessageDialog(null, "Welcome to the Normalmode please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
 				+ "you should note if you want more options please consider changing modes ");
 	}
 	//method to clear panel 3 
-	public void clearMode()
+	private void clearMode()
 	{
-		panel3.removeAll();
+		westPanel.removeAll();
 		revalidate();
 	}
 	//Method to turn on Advance mode by manipulating panels and their components 
-	public void advancemodeON()
+	private void advanceModeOn()
 	{
 		clearTable();
-		panel3.add(button4);
-		textfield1.setText("Enter your Category");
-		panel3.add(textfield1);
-		panel3.add(textfield2);
-		panel3.add(textfield3);
-		panel3.add(textfield4);
-		panel3.add(button5);
-		panel3.add(button8);
+		//re-initialising panel 3 
+		westPanel.add(infoButton);
+		selectTextfield.setText("Enter your Category");
+		westPanel.add(selectTextfield);
+		westPanel.add(clauseTextfield1);
+		westPanel.add(clauseTextfield2);
+		westPanel.add(clauseTextfield3);
+		westPanel.add(submitButton);
+		westPanel.add(previewButton);
 		revalidate();
 	}
 	//Method to display table in the GUI
-	public void displayTable()
+	private void displayTable()
 	{
 		try
 		{
@@ -305,9 +305,9 @@ public class GUI extends JFrame implements ActionListener
 			dataModel = (DefaultTableModel) (datasetQuery.queryToTableModel());
 	    	table = new JTable();
 			table.setModel(dataModel);
-	   		pane = new JScrollPane(table);
-			pane.setPreferredSize(new Dimension(800,400));
-			panel2.add(pane);
+	   		scrollPane = new JScrollPane(table);
+			scrollPane.setPreferredSize(new Dimension(800,400));
+			centerPanel.add(scrollPane);
 			revalidate();
 		}
 		catch(Exception e)
@@ -316,27 +316,27 @@ public class GUI extends JFrame implements ActionListener
 		}
 	}
 	//method to clear the panel that shows the table 
-	public void clearTable()
+	private void clearTable()
 	{
-    	panel2.removeAll();
+    	centerPanel.removeAll();
     	revalidate();
     	repaint();
 		
 	}
 	//Method to turn on SQL mode by manipulating panels and their components 
-	public void sqlMode()
+	private void sqlModeOn()
 	{
 		clearTable();
-		textfield1.setText("Enter your SQL Statement here");
-		button1 = new JButton("Submit");
-		button1.addActionListener(this);
-		panel3.add(textfield1);
-		panel3.add(button1);
+		selectTextfield.setText("Enter your SQL Statement here");
+		connectButton = new JButton("Submit");
+		connectButton.addActionListener(this);
+		westPanel.add(selectTextfield);
+		westPanel.add(connectButton);
 		revalidate();
 		
 	}
 	//Method to check if query executed successfully and if not display appropriate message
-	public void errorMessageCheck()
+	private void errorMessageCheck()
 	{
 		if(datasetQuery.isQueryStatus() ==false)
 		{
