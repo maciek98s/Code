@@ -1,6 +1,6 @@
 /***
  * Author : Maciej Skrzypczynski ( C17339163)
- * Last Update Date: 09/04/2019
+ * Last Update Date: 11/04/2019
  * Description : Data explorer assignment topic using orcale, this is the control class 
  * and it has only the purpose of initialising the gui.
  * 
