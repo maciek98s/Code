@@ -26,8 +26,8 @@ public class DBConnect
 		{
 			/* conneting to redwood in dit 
 			 *  String servername = "redwood.ict.ad.dit.ie";
-    	String portnumber = "1521";
-    	String sid = "pdb12c.ict.ad.dit.ie";
+    		String portnumber = "1521";
+    		String sid = "pdb12c.ict.ad.dit.ie";
     		String url = "jdbc:oracle:thin:@" + servername + ":" + portnumber + "/" + sid;
     		setConnect(DriverManager.getConnection(url,"mskrzypczynski","C17339163"));
 			 	*/
