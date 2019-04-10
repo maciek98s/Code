@@ -1,5 +1,5 @@
 /*Author : Maciej Skrzypczynski
- *Last Update Date: 09/04/2019
+ *Last Update Date: 11/04/2019
  *
  *Description : A class manipulating and dealing with sql quarries
  *using java sql package 
