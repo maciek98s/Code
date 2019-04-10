@@ -1,5 +1,5 @@
 /*Author : Maciej Skrzypczynski
- *Last Update Date: 09/04/2019
+ *Last Update Date: 11/04/2019
  *
  *Desciption : A class that contains The gui of the programm. 
  *It contains methods that execute code depending on which button is pressed
