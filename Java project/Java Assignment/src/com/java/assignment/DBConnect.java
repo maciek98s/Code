@@ -1,7 +1,7 @@
 /*Author : Maciej Skrzypczynski
  *Last Update Date: 11/04/2019
  *
- *Desciption : Class used for getting a connection to the database using oracle driver 
+ *Description : Class used for getting a connection to the database using oracle driver 
  *also contains methods to create and close connections 
  * 
  */
@@ -24,21 +24,21 @@ public class DBConnect
 	{
 		try
 		{
-			/* conneting to redwood in dit 
-			 *  String servername = "redwood.ict.ad.dit.ie";
+			 //conneting to redwood in dit 
+			   String servername = "redwood.ict.ad.dit.ie";
     		String portnumber = "1521";
     		String sid = "pdb12c.ict.ad.dit.ie";
     		String url = "jdbc:oracle:thin:@" + servername + ":" + portnumber + "/" + sid;
     		setConnect(DriverManager.getConnection(url,"mskrzypczynski","C17339163"));
-			 	*/
+			 	
 			//connecting to local server
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			setConnect(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","mac","mac"));
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
+			//setConnect(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","mac","mac"));
 			return true;
 		}
 		catch(Exception ex)
 		{
-			System.out.println("ERROR");
+			System.out.println("ERROR could not connect ");
 			return false;
 		}
 	}

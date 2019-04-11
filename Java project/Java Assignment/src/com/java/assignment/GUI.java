@@ -54,7 +54,7 @@ public class GUI extends JFrame implements ActionListener
 		//Creating an array for Combo Box
 		String[] facts = {"Interesting fact 1","Interesting fact 2","Interesting fact 3","Interesting fact 4"};
 		
-		//Initialising Attributes 
+		//Initializing Attributes 
 		box = new JComboBox(facts);
 		
 		northPanel = new JPanel();
@@ -167,9 +167,9 @@ public class GUI extends JFrame implements ActionListener
 	    //When button4 clicked display information in a form of a pop up
 	    if (e.getSource() == infoButton)
 	    {
-	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause ");
-	    	JOptionPane.showMessageDialog(null, "for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park or just name with the rest of the fields blank");
-	    	JOptionPane.showMessageDialog(null, "to just view the name collumn, Click PREVIEW button to Show the whole table and remeber when searching for a specific name SPELLING AND CAPITOL latters matter ");
+	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause "
+	    	+ " \n for example one could enter (Number  name = Corrib Park) to view the numberid of parks which the name Corrib Park or just name with the rest of the fields blank"
+	    	+ "\n to just view the name collumn, Click PREVIEW button to Show the whole table and remeber when searching for a specific name SPELLING AND CAPITOL latters matter ");
 	    	
 	    	
 		
@@ -285,7 +285,7 @@ public class GUI extends JFrame implements ActionListener
 	private void advanceModeOn()
 	{
 		clearTable();
-		//re-initialising panel 3 
+		//re-initializing west panel
 		westPanel.add(infoButton);
 		selectTextfield.setText("Enter your Category");
 		westPanel.add(selectTextfield);
