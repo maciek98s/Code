@@ -81,7 +81,7 @@ public class GUI extends JFrame implements ActionListener
 		add(centerPanel, BorderLayout.CENTER);
 		add(westPanel, BorderLayout.WEST);
 		
-		//adding components to panel
+		//adding components to northPanel
 		northPanel.add(connectButton);
 		
 		//adding listeners to Components of GUI
@@ -110,7 +110,7 @@ public class GUI extends JFrame implements ActionListener
 	    {
 	    	try
 	    	{
-	    		//if Enter Category is in selectTextfield  means button 1 == connect Button so do the following
+	    		//if "Enter Category" is in selectTextfield  means connectButton == connect Button so do the following
 	    		if(selectTextfield.getText().equals("Enter Category"))
 	    		{
 		    		datasetQuery = new QueryProcessing();
@@ -133,7 +133,7 @@ public class GUI extends JFrame implements ActionListener
 		    		}
 		    		normalModeOn();
 	    		}
-	    		// else button is reused for submit button for sql mode
+	    		// else if selectTextfield is not equal to "Enter Category" the coonectButton button is reused for submit button for sql mode
 	    		else
 	    		{
 	    			clearTable();
@@ -266,7 +266,7 @@ public class GUI extends JFrame implements ActionListener
 	    }
 		
 	}
-	//Method to turn on Normal mode by manipulating panels and their components 
+	//Method to turn on Normal mode by manipulating westpanel and its components 
 	private void normalModeOn()
 	{
 		clearTable();
@@ -283,7 +283,7 @@ public class GUI extends JFrame implements ActionListener
 		westPanel.removeAll();
 		revalidate();
 	}
-	//Method to turn on Advance mode by manipulating panels and their components 
+	//Method to turn on Advance mode by manipulating westpanel and its components 
 	private void advanceModeOn()
 	{
 		clearTable();
@@ -325,7 +325,7 @@ public class GUI extends JFrame implements ActionListener
     	repaint();
 		
 	}
-	//Method to turn on SQL mode by manipulating panels and their components 
+	//Method to turn on SQL mode by manipulating west panel and its components 
 	private void sqlModeOn()
 	{
 		clearTable();
