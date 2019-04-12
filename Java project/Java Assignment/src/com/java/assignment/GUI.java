@@ -40,7 +40,6 @@ public class GUI extends JFrame implements ActionListener
 	private JPanel westPanel;
 	
 	private JTable table;
-	//private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private DefaultTableModel dataModel;
 	private JComboBox box;
@@ -51,7 +50,7 @@ public class GUI extends JFrame implements ActionListener
 		super(title);
 		//setting layout
 		setLayout(new BorderLayout());
-		//Creating an array for Combo Box
+		//Creating a string array for Combo Box
 		String[] facts = {"Interesting fact 1","Interesting fact 2","Interesting fact 3","Interesting fact 4"};
 		
 		//Initializing Attributes 
@@ -76,6 +75,7 @@ public class GUI extends JFrame implements ActionListener
 		clauseTextfield1 = new JTextField("",5);
 		clauseTextfield2 = new JTextField("",5);
 		clauseTextfield3 = new JTextField("",5);
+		
 		//add panel to layout
 		add(northPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
@@ -96,8 +96,9 @@ public class GUI extends JFrame implements ActionListener
 		box.addActionListener(this);
 		
 		
-		
+		//full screen 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		setVisible(true);
 	}
 
@@ -109,17 +110,18 @@ public class GUI extends JFrame implements ActionListener
 	    {
 	    	try
 	    	{
-	    		//if Enter Category is in text field 1 means button 1 == connect Button 
+	    		//if Enter Category is in selectTextfield  means button 1 == connect Button so do the following
 	    		if(selectTextfield.getText().equals("Enter Category"))
 	    		{
 		    		datasetQuery = new QueryProcessing();
+		    		//if connection == false meaning connection unsuccessfull
 		    		if(datasetQuery.connectionStatus()==false)
 		    		{
 		    			JOptionPane.showMessageDialog(null, "Could not successfully connect to the database");
 		    			System.exit(0);
 		    			
 		    		}
-		    		//if connection == true meaning successful set up the panel
+		    		//else successfull
 		    		else
 		    		{
 		    			JOptionPane.showMessageDialog(null, "Welcome to the Data Explorer program");
@@ -139,9 +141,6 @@ public class GUI extends JFrame implements ActionListener
 	    			errorMessageCheck();
 	    			displayTable();
 	    		}
-	    			
-
-
 	    	}
 	    	catch(Exception ee)
 	    	{
@@ -149,14 +148,14 @@ public class GUI extends JFrame implements ActionListener
 	    	}
 	    	
 	    }
-	    //When button2 to pressed Panel clears and goes into Advance mode method 
+	    //When advanceModeButton is pressed Panel clears and goes into Advance mode method 
 	    if (e.getSource() == advanceModeButton)
 	    {
 	    	clearMode();
 	    	advanceModeOn();
 	    	JOptionPane.showMessageDialog(null, "Welcome to the Advnaced mode please click the INFO button for more information about this mode");
 	    }
-	  //When button3 to pressed Panel clears and goes into sql mode method 
+	  //When sqlModeButton is pressed Panel clears and goes into sql mode method 
 	    if (e.getSource() == sqlModeButton)
 	    {
 			clearMode();
@@ -164,7 +163,7 @@ public class GUI extends JFrame implements ActionListener
 			JOptionPane.showMessageDialog(null, "Welcome to SQL Mode in this mode you can enter an sql select statement of your choice with correct syntax to be viewed in the table (The Table name is city)");
 		
 	    }
-	    //When button4 clicked display information in a form of a pop up
+	    //When infoButton clicked display information in a form of a pop up
 	    if (e.getSource() == infoButton)
 	    {
 	    	JOptionPane.showMessageDialog(null, "The Advanced mode lets you specify which perticular category you would like to view and allows you for an OPTIONAL clause "
@@ -174,7 +173,7 @@ public class GUI extends JFrame implements ActionListener
 	    	
 		
 	    }
-	    //Initilising what pops up when the user interacts with the Combo Box 
+	    //Initialising what pops up when the user interacts with the Combo Box 
 	    if (e.getSource() == box)
 	    {
 	    	//temporary string 
@@ -219,14 +218,18 @@ public class GUI extends JFrame implements ActionListener
 	    //button when pressed manipulates Jtextfields to execute a query
 	    if (e.getSource() == submitButton)
 	    {
+	    	//string variables to store getTextField values
 	    	String qeuryString1,qeuryString2,qeuryString3,qeuryString4; 
 	    	clearTable();
 	    	qeuryString1  = "\""+ selectTextfield.getText().toUpperCase()+"\"";
+	    	
+	    	//if not where clause 
 	    	 if(clauseTextfield1.getText().equals(""))
 	    	 {
 	    		 datasetQuery.executeQuery("select "+qeuryString1+"from city");
 	    		 errorMessageCheck();
 	    	 }
+	    	 //else if there is where clause 
 	    	 else
 	    	 {
 	    		 qeuryString2  = "\""+ clauseTextfield1.getText().toUpperCase()+"\"";
@@ -235,24 +238,23 @@ public class GUI extends JFrame implements ActionListener
 	    		 datasetQuery.executeQuery("select "+qeuryString1+"from city where "+qeuryString2+qeuryString3+qeuryString4);
 	    		 errorMessageCheck();
 	    	 }
-	    	//clearTable();
 	    	displayTable();
 	    }
-	    //button when pressed calls normalmode method
+	    //when normalModeButton  pressed calls normalmode method
 	    if (e.getSource() == normalModeButton)
 	    {
 	    	clearMode();
 	    	normalModeOn();
 	    	
 	    }
-	    //button when pressed closes connection and exits the program
+	    //quitButton when pressed closes connection and exits the program
 	    if (e.getSource() == quitButton)
 	    {
 	    	datasetQuery.closeConnection();
 	    	System.exit(0);
 	    	
 	    }
-	    //button when pressed shows all entries in the table 
+	    //previewButton when pressed shows all entries in the table 
 	    if (e.getSource() == previewButton)
 	    {
 	    	clearTable();
@@ -275,7 +277,7 @@ public class GUI extends JFrame implements ActionListener
 		JOptionPane.showMessageDialog(null, "Welcome to the Normalmode please use the combo box on the left to pick an interesting fact to display in the table, this is also the default mode"
 				+ "you should note if you want more options please consider changing modes ");
 	}
-	//method to clear panel 3 
+	//method to clear west panel 
 	private void clearMode()
 	{
 		westPanel.removeAll();
@@ -315,7 +317,7 @@ public class GUI extends JFrame implements ActionListener
 			System.out.println("Table is null");
 		}
 	}
-	//method to clear the panel that shows the table 
+	//method to clear the center panel that contains the table(scroll panel) 
 	private void clearTable()
 	{
     	centerPanel.removeAll();
@@ -340,7 +342,7 @@ public class GUI extends JFrame implements ActionListener
 	{
 		if(datasetQuery.isQueryStatus() ==false)
 		{
-			JOptionPane.showMessageDialog(null, "Oops seems like an error has occur , please make sure your input is correct");
+			JOptionPane.showMessageDialog(null, "Oops seems like an error has occured , please make sure your input is correct");
 		}
 	}
 

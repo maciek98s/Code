@@ -25,13 +25,13 @@ public class DBConnect
 		try
 		{
 			 //conneting to redwood in dit 
-			   String servername = "redwood.ict.ad.dit.ie";
+			 String servername = "redwood.ict.ad.dit.ie";
     		String portnumber = "1521";
     		String sid = "pdb12c.ict.ad.dit.ie";
     		String url = "jdbc:oracle:thin:@" + servername + ":" + portnumber + "/" + sid;
     		setConnect(DriverManager.getConnection(url,"mskrzypczynski","C17339163"));
 			 	
-			//connecting to local server
+			//connecting to my local server
 			//Class.forName("oracle.jdbc.driver.OracleDriver");
 			//setConnect(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","mac","mac"));
 			return true;

@@ -12,8 +12,8 @@ public class Control {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-
+		//create the GUI
+		GUI gui = new GUI("Data explorer");
 		
 	}
 
