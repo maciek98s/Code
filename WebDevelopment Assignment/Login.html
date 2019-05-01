@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="CSS Style sheets/loginCSS.css">
+	<style>
+	</style>
+</head>
+<body>
+<body>
+	<div style="  float: left; ">
+		<input type="image" src="images/logo.jpg" height="200" width="200">
+	</div>
+	<div style="float:right;">
+		<p class="text"> Author: Maciej Skrzypczynski <br> Studnet nr: C17339163 </p>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+	<ul>
+  <li><a class="NavbarText" href="HomePage.html">Home</a></li>
+  <li><a class="NavbarText" href="Login.html">Login</a></li>
+  <li><a class="NavbarText" href="contact.html">Contacts</a></li>
+  <li><a class="NavbarText" href="about.html">About Us</a></li>
+</ul>
+
+<div style="width: 10%; margin: 0 auto;">
+	<button onclick="document.getElementById('id01').style.display='block'" style="display: flex; justify-content: center;  ">Login</button>
+</div>
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="Php/checkuser.php" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="images/avatar.png" alt="Avatar" class="avatar" >
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="Name" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="Password" required>
+        
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+</div>
+
+
+
+
+<div style="width: 10%; margin: 0 auto;">
+	<button onclick="document.getElementById('id02').style.display='block'" style="display: flex; justify-content: center;  ">Create Account</button>
+</div>
+
+<div id="id02" class="modal">
+  
+  <form class="modal-content animate" action="Php/newuser.php" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="images/new.png" alt="Avatar" class="avatar" >
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>First Name</b></label>
+      <input type="text" placeholder="Enter Your Name" name="Name" required>
+
+      <label for="psw"><b>Surname</b></label>
+      <input type="text" placeholder="Enter Your Surname" name="Surname" required>
+
+        <label for="uname"><b>UserName</b></label>
+      <input type="text" placeholder="Enter Your UserName" name="Username" required>
+
+       <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Your Password" name="Password" required>
+
+       <label for="psw"><b>E-Mail</b></label>
+      <input type="email" placeholder="Enter Your Email" name="Email" required>
+        
+      <button type="submit">Register</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> I want to receive any further promotions
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+var modal = document.getElementById('id02');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+</body>
+</html>

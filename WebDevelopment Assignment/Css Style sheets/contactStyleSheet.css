@@ -1,0 +1,82 @@
+body{
+	height: 100%;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: block;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+div.div1{
+	background-color: red;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 20px;
+
+}
+
+.left, .right {
+  width: 5%;
+  
+
+}
+
+.middle {
+  width: 90%;
+    
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+p.heading
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18px;
+	color: grey;
+}
+.heading2
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 24px;
+	color: grey;
+}
+.text
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	color: black;
+}
+.NavbarText
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	color: white;
+}
